@@ -261,3 +261,17 @@ h1 {
     border-radius: 2vw;
     position: relative;
 }
+.post{
+  position: relative;
+  transform: translateY(-150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+.post.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+.post.past{
+  transform: translateY(150px);
+  opacity: 0;
+}
