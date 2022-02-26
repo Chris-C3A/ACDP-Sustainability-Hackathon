@@ -20,6 +20,9 @@ class User(UserMixin, db.Model):
     # For creating the User and Post one-to-many relationship
     posts = db.relationship("Post", back_populates="author")
 
+    # For creating the User and Post one-to-many relationship
+    following = db.relationship("Follow")
+
 class Post(db.Model):
     # Table name
     __tablename__ = 'post'
@@ -66,4 +69,3 @@ class Follow(db.Model):
     # For creating the User and follows one-to-many relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    
