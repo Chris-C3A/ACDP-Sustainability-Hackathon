@@ -7,7 +7,6 @@ from app.src.constants import *
 from datetime import datetime
 import enum
 
-
 class PrivacyEnum(enum.Enum):
     # Used to show whether a user profile is public or private
     public = True;
@@ -38,6 +37,8 @@ class Post(db.Model):
     caption = db.Column(db.String(CAPTION_CHAR_LIMIT))
     image_file = db.Column(db.String(120), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
 
     # For creating the User and Post one-to-many relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -45,6 +46,10 @@ class Post(db.Model):
 
     # For creating the Post and votes one-to-many relationship
     votes = db.relationship("Vote")
+
+    @staticmethod
+    def get_location():
+        pass
 
 
 class VoteEnum(enum.Enum):
