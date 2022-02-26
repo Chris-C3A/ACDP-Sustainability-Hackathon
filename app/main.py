@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, flash, jsonify, request, redirect, url_for
 from flask_login import login_required, current_user
-from .models import *
-from app import db
 
 from app import db
 from app.models import User, Post, Follow
@@ -18,37 +16,28 @@ def index():
 
 @main.route('/feed')  # display posts
 def feed():
-    posts = []
-    for record in Follow.query.filter_by(user_id=current_user.get_id()):
-        for post in (Post.query.filter_by(user_id=record.following_id).order_by(Post.created_at).all()):
-            posts.append(post)
-    posts.sort(key=lambda l:l.created_at, reverse=True)
+    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
     page = render_template('postGen.html', posts=posts)
     return page
 
 @main.route('/explore')
 def exploreFeed():
-    posts = []
-    for record in User.query.filter_by(public=PrivacyEnum.public).all():
-        for post in (Post.query.filter_by(user_id=record.id).order_by(Post.created_at).all()):
-            posts.append(post)
-    posts.sort(key=lambda l:l.created_at, reverse=True)
+    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
     page = render_template('postGen.html', posts=posts)
     return page
 
 @main.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     if request.method == 'GET':
         return render_template('profile.html')
-    # else:
-    #     username
-    #     email
-    #     public
+    else:
+        visibility = request.form.get('visibility')
+        print(visibility)
+        # current_user.public = visibility
+        # db.session.commit()
 
-    #     current_user.username = username
-    #     u
-
-    #     db.session.commit()
+        return redirect(url_for('main.profile'))
 
 # api request
 
