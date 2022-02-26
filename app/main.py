@@ -6,7 +6,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')  # home page that return 'index'
 def index():
-    posts=[(1,"Title1",'/static/avacad.jpg','LOL xD'),(2,"Title2",'/static/avacad.jpg', 'Funny Caption'),(3,"Title3",'/static/avacad.jpg', 'haha'),(4,"Title4",'/static/avacad.jpg','WasteWatchers Unite!')] #map(tuple,fetchall(QUERY))
+    posts=[(1,"My Friday",'/static/stock1.jpg','LOL xD'),(2,"Your Monday",'/static/stock2.jpg', 'Funny Caption'),(3,"For the gram!",'/static/stock3.jpg', 'haha'),(4,"Honestly",'/static/stock4.jpg','WasteWatchers Unite!')] #map(tuple,fetchall(QUERY))
     page = render_template('postGen.html',posts=posts)
     return page
 

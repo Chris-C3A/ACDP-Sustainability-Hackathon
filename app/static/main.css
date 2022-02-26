@@ -223,3 +223,30 @@ h1 {
   letter-spacing: 4px;
   font-family: "Roboto", sans-serif;
 }
+.posts {
+    text-align: left;
+}
+.posts h2 {
+    font-size: 30px;
+    margin-left: 10px;
+    padding-top:5px;
+    margin-bottom: 5px;
+}
+.posts img {
+    max-width: 100%;
+    height: auto;
+    scale: d;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.posts h5 {
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+.posts article {
+    margin-bottom: 25px;
+    background-color: #20bc56; /*Placeholder colour*/
+    border-radius: 5px;
+}
