@@ -16,16 +16,16 @@ def new_post():
     elif request.method == 'POST':
         # author = current_user
         caption = request.form.get('caption')
-        uploaded_image = request.files['file']
-        print(caption)
-        print(uploaded_image)
+        longitude = request.form.get('longitude')
+        latitude = request.form.get('latitude')
 
+
+        uploaded_image = request.files['file']
         post_image = savePostImage(uploaded_image)
-        print(post_image)
 
         if post_image:
             # creates new post
-            new_post = Post(caption=caption, image_file=post_image, author=current_user)
+            new_post = Post(caption=caption, longitude=longitude, latitude=latitude, image_file=post_image, author=current_user)
             
             db.session.add(new_post)
             db.session.commit()
