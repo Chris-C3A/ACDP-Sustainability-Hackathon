@@ -64,13 +64,46 @@ def feed():
 
 @main.route('/explore', methods=['GET', 'POST'])
 def exploreFeed():
-    posts = []
-    for record in User.query.filter_by(public=PrivacyEnum.public).all():
-        for post in (Post.query.filter_by(user_id=record.id).order_by(Post.created_at).all()):
-            posts.append(post)
-    posts.sort(key=lambda l: l.created_at, reverse=True)
-    page = render_template('postGen.html', posts=posts)
-    return page
+    if request.method == 'GET':
+        posts = []
+        votes = []
+        index = 0
+        for record in User.query.filter_by(public=PrivacyEnum.public).all():
+            for post in (Post.query.filter_by(user_id=record.id).order_by(Post.created_at).all()):
+                votes.append(0)
+                for voteRecord in Vote.query.filter_by(post_id=post.id):
+                    if (voteRecord.upvoted == VoteEnum.upvote):
+                        votes[index] += 1
+                    elif (voteRecord.upvoted == VoteEnum.downvote):
+                        votes[index] -= 1
+                posts.append(post)
+        posts.sort(key=lambda l: l.created_at, reverse=True)
+        page = render_template('postGen.html', posts=posts, votes=votes)
+        return page
+    else:
+        vote1 = request.form.get('Up')
+        vote2 = request.form.get('Down')
+        new_vote = None
+        if (vote1 is not None):
+            record = Vote.query.filter_by(post_id=vote1).filter_by(
+                user_id=current_user.get_id()).first()
+            if (record is not None):
+                record.upvoted = VoteEnum.upvote
+            else:
+                new_vote = Vote(user_id=current_user.get_id(),
+                                post_id=vote1, upvoted=VoteEnum.upvote)
+        elif (vote2 is not None):
+            record = Vote.query.filter_by(post_id=vote2).filter_by(
+                user_id=current_user.get_id()).first()
+            if (record is not None):
+                record.upvoted = VoteEnum.downvote
+            else:
+                new_vote = Vote(user_id=current_user.get_id(),
+                                post_id=vote2, upvoted=VoteEnum.downvote)
+        if (new_vote is not None):
+            db.session.add(new_vote)
+        db.session.commit()
+        return redirect('/explore')
 
 
 @main.route('/profile', methods=['GET', 'POST'])
