@@ -1,3 +1,42 @@
-{% extends "base.html" %} {% block content %}
-<h1 class="title">Welcome, {{current_user.username}}!</h1>
+{% extends "base.html" %}
+{% block head %}
+<link href="/static/profile.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+{% block content %}
+{% if current_user.is_authenticated %}
+<h1 class="Username">@{{ current_user.username }}</h1>
+<div class="card-profile-stats d-flex justify-content-center mt-md-5">
+  <div>
+    <h2
+ class="Heading">{{ numberOfPosts }}</h2>
+    <h2 class="Description">Posts</h2>
+  </div>
+  <div>
+    <h2 class="Heading">{{ followers }}</h2>
+    <h2 class="Description">Followers</h2>
+  </div>
+  <div>
+    <h2 class="Heading">{{ following }}</h2>
+    <h2 class="Description">Following</h2>
+  </div>
+</div>
+<h2 class="Yourposts">Your posts:</h3>
+<div class="posts">
+  {% for item in posts %}
+  <article id="{{ item.id }}" class="post">
+    <h2> {{ item.author.username }} </h2>
+    <img src="static/post_pics/{{ item.image_file }}">
+    <h5>{{ item.caption }}</h5>
+  </article>
+  {% endfor %}
+</div id="posts">
+{% else %}
+<h1>Please Login to See Posts</h1>
+{% endif %}
+{% endblock %}
+{% block feedbar %}
+<div class="side-buttons">
+  <a href="/feed"><button id="left">Feed</button></a>
+  <a href="/explore"><button id="right">Explore</button></a>
+</div>
 {% endblock %}

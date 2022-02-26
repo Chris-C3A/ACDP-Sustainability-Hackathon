@@ -277,3 +277,4 @@ app/tmp/database.db
 
 localhost-key.pem
 localhost.pem
+.vscode/
