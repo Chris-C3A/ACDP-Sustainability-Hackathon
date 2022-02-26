@@ -66,11 +66,19 @@ def feed():
 def exploreFeed():
     if request.method == 'GET':
         posts = []
+        votes = []
+        index = 0
         for record in User.query.filter_by(public=PrivacyEnum.public).all():
             for post in (Post.query.filter_by(user_id=record.id).order_by(Post.created_at).all()):
+                votes.append(0)
+                for voteRecord in Vote.query.filter_by(post_id=post.id):
+                    if (voteRecord.upvoted == VoteEnum.upvote):
+                        votes[index] += 1
+                    elif (voteRecord.upvoted == VoteEnum.downvote):
+                        votes[index] -= 1
                 posts.append(post)
         posts.sort(key=lambda l: l.created_at, reverse=True)
-        page = render_template('postGen.html', posts=posts)
+        page = render_template('postGen.html', posts=posts, votes=votes)
         return page
     else:
         vote1 = request.form.get('Up')
