@@ -277,4 +277,29 @@ h1 {
   transform: translateY(150px);
   opacity: 0;
 }
-
+#left {
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	margin-right: 0px;
+}
+#right {
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-left: 0px;
+}
+.side-buttons button {
+	float: left;
+  background-color: #4dc451;
+}
+.side-buttons:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.side-buttons button::focus{
+  background-color: #209424;
+}
+.side-buttons {
+  margin-left: 32vw;
+  margin-top: 5vh;
+}
