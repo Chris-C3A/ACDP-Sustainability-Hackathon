@@ -29,10 +29,11 @@ class Post(db.Model):
     # Post info
     id = db.Column(db.Integer, primary_key=True)
     caption = db.Column(db.String(CAPTION_CHAR_LIMIT))
+    image_file = db.Column(db.String(120), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # For creating the User and Post one-to-many relationship
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     author = db.relationship("User", back_populates="posts")
 
     # For creating the Post and votes one-to-many relationship

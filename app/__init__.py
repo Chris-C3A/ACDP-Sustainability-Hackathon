@@ -33,10 +33,13 @@ def create_app():
         return User.query.get(int(user_id))
 
     # register endpoint blueprints
-    from app.auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
-
     from app.main import main as main_blueprint
+    from app.auth import auth as auth_blueprint
+    from app.post import post as post_blueprint
+
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(post_blueprint, url_prefix="/post")
+
 
     return app
