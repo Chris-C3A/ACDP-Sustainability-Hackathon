@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, flash, Flask, render_template
 from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
+mapViewer = Flask(__name__)
 
 
 @main.route('/')
@@ -24,3 +25,7 @@ def exploreFeed():
 @main.route('/profile')
 def profile():
     return render_template('profile.html')
+
+@main.route('/map')
+def map_func():
+	return render_template('map.html')
