@@ -1,6 +1,9 @@
 {% extends "base.html" %} {% block content %}
 {% if current_user.is_authenticated %}
         <div class="posts">
+{% if posts|length == 0 %}
+  <p style="text-align:center;">No posts to show :(</p>
+{% endif %}
 {% for item in posts %}
 <article id="{{ item.id }}" class="post">
     <h2> {{ item.author.username }} </h2>
