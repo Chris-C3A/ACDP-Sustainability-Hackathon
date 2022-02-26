@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% block content %}
     <body>
-        <div id="posts">
+        <div class="posts">
 {% for item in posts %}
 <article id="{{ item[0] }}">
     <h2> {{ item[1] }} </h2>
-    <img width="80" height="80" src="{{ item[2] }}">
+    <img src="{{ item[2] }}">
     <h5>{{ item[3] }}</h5>
 </article>
 {% endfor %}
