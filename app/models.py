@@ -1,4 +1,5 @@
 # from turtle import title
+from email.policy import default
 from app import db
 from flask import current_app
 from flask_login import UserMixin
@@ -6,6 +7,11 @@ from app.src.constants import *
 from datetime import datetime
 import enum
 
+
+class PrivacyEnum(enum.Enum):
+    # Used to show whether a user profile is public or private
+    public = True;
+    private = False;
 
 class User(UserMixin, db.Model):
     # Table name
@@ -17,6 +23,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(USERNAME_CHAR_LIMIT), unique=True)
     email = db.Column(db.String(EMAIL_CHAR_LIMIT), unique=True)
     password = db.Column(db.String(PASSWORD_CHAR_LIMIT))
+    public = db.Column(db.Enum(PrivacyEnum), default=PrivacyEnum.private)
 
     # For creating the User and Post one-to-many relationship
     posts = db.relationship("Post", back_populates="author")
@@ -42,8 +49,8 @@ class Post(db.Model):
 
 class VoteEnum(enum.Enum):
     # Used to show whether a user has upvoted or downvoted a post
-    upvote = 1
-    downvote = 2
+    upvote = True
+    downvote = False
 
 
 class Vote(db.Model):

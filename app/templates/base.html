@@ -53,5 +53,31 @@
         </div>
       </div>
     </section>
+    <script>
+      function reveal() {
+        var reveals = document.querySelectorAll(".post");
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementBottom = reveals[i].getBoundingClientRect().bottom;
+          var elementVisible = 150;
+          if (elementTop < windowHeight - elementVisible && elementBottom > 0){
+            reveals[i].classList.add("active");
+            reveals[i].classList.remove("past");
+          }
+          else if (elementBottom < 0){
+            reveals[i].classList.remove("active");
+            reveals[i].classList.add("past");
+          }
+           else {
+            reveals[i].classList.remove("active");
+            reveals[i].classList.remove("past");
+          }
+        }
+      }
+      window.addEventListener("scroll", reveal);
+
+      reveal();
+</script>
   </body>
 </html>
