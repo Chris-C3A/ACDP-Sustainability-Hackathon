@@ -212,7 +212,7 @@ body {
   background: linear-gradient(to top, #76b852, #8dc26f);
   background-size: cover;
   background-attachment: fixed;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
@@ -222,13 +222,12 @@ h1 {
   font-weight: 100;
   text-transform: capitalize;
   letter-spacing: 4px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 .posts {
     text-align: left;
 }
 .posts h2 {
-    font-size: 3vw;
     padding-top:1vw;
     margin-bottom: 1vw;
     position: absolute;
@@ -237,11 +236,12 @@ h1 {
     color: #f1f1f1;
     width: 100%;
     transition: .5s ease;
-    font-size: 2vw;
+    font-size: 4vw;
     padding: 2vw;
     text-align: center;
     border-top-left-radius: 2vw;
     border-top-right-radius: 2vw;
+    font-family: 'Montserrat', sans-serif;
 }
 .posts img {
     max-width: 100%;
@@ -273,5 +273,5 @@ h1 {
 }
 .post.past{
   transform: translateY(150px);
-  opacity: 0;
+  opacity: 0.5;
 }
