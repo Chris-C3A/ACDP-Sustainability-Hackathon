@@ -1,8 +1,26 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block head %}
+<link href="/static/profile.css" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+{% block content %}
 {% if current_user.is_authenticated %}
-<h1 class="title">Your posts (@{{ current_user.username }})</h1>
-<h2 class="title">Posts: {{ numberOfPosts }} Followers: 
-  {{ followers }} Following: {{ following }}</h2>
+<h1 class="Username">@{{ current_user.username }}</h1>
+<div class="card-profile-stats d-flex justify-content-center mt-md-5">
+  <div>
+    <h2
+ class="Heading">{{ numberOfPosts }}</h2>
+    <h2 class="Description">Posts</h2>
+  </div>
+  <div>
+    <h2 class="Heading">{{ followers }}</h2>
+    <h2 class="Description">Followers</h2>
+  </div>
+  <div>
+    <h2 class="Heading">{{ following }}</h2>
+    <h2 class="Description">Following</h2>
+  </div>
+</div>
+<h2 class="Yourposts">Your posts:</h3>
 <div class="posts">
   {% for item in posts %}
   <article id="{{ item.id }}" class="post">
