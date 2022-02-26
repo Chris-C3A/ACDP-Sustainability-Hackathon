@@ -8,13 +8,23 @@ from app.src.utils import get_coordinates_of_posts
 main = Blueprint('main', __name__)
 
 
-@main.route('/')  # home page that return 'index'
+@main.route('/')
 def index():
-    posts = [(1, "My Friday", '/static/stock1.jpg', 'LOL xD'), (2, "Your Monday", '/static/stock2.jpg', 'Funny Caption'), (3, "For the gram!",
-                                                                                                                           '/static/stock3.jpg', 'haha'), (4, "Honestly", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
+    page = render_template('index.html')
+    return page
+
+
+@main.route('/feed')  # display posts
+def feed():
+    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
     page = render_template('postGen.html', posts=posts)
     return page
 
+@main.route('/explore')
+def exploreFeed():
+    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
+    page = render_template('postGen.html', posts=posts)
+    return page
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
