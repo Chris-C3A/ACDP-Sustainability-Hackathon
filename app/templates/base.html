@@ -38,7 +38,9 @@
     <section class="hero is-fullheight">
       {% block feedbar %} {% endblock %}
       <input type="checkbox" id="overlay-input" />
-      <label for="overlay-input" id="overlay-button"><span></span></label>
+      <label for="overlay-input" id="overlay-button" onclick="toggleMap()"
+        ><span></span
+      ></label>
       <div id="overlay">
         <ul>
           <li><a href="/">Home</a></li>
@@ -64,6 +66,20 @@
       </div>
     </section>
     <script>
+      let menuOpened = false;
+      // toggle map when menu is opened/closed
+      function toggleMap() {
+        menuOpened = !menuOpened;
+
+        let map_element = document.getElementById("map");
+        if (map_element) {
+          if (menuOpened) {
+            map_element.style.display = "none";
+          } else {
+            map_element.style.display = "block";
+          }
+        }
+      }
       function reveal() {
         var reveals = document.querySelectorAll(".post");
         for (var i = 0; i < reveals.length; i++) {

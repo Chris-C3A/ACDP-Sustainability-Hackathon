@@ -112,7 +112,9 @@
           post.caption
         }</p><img src='/static/post_pics/${
           post.image_file
-        }'> <p>${getCreatedTimePassed(post.created_at)}</p>`,
+        }' unselectable="on" style="pointer-events:none;"> <p>${getCreatedTimePassed(
+          post.created_at
+        )}</p>`,
         {
           minWidth: 75,
         }
