@@ -1,4 +1,5 @@
 # from turtle import title
+from email.policy import default
 from app import db
 from flask import current_app
 from flask_login import UserMixin
@@ -22,7 +23,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(USERNAME_CHAR_LIMIT), unique=True)
     email = db.Column(db.String(EMAIL_CHAR_LIMIT), unique=True)
     password = db.Column(db.String(PASSWORD_CHAR_LIMIT))
-    public = db.Column(db.Enum(PrivacyEnum), nullable=False)
+    public = db.Column(db.Enum(PrivacyEnum), default=PrivacyEnum.private)
 
     # For creating the User and Post one-to-many relationship
     posts = db.relationship("Post", back_populates="author")
