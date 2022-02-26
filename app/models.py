@@ -36,37 +36,37 @@ class Post(db.Model):
     author = db.relationship("User", back_populates="posts")
 
     # For creating the Post and votes one-to-many relationship
-    # votes = db.relationship("vote")
+    votes = db.relationship("Vote")
 
 
-# class VoteEnum(enum.Enum):
-#     # Used to show whether a user has upvoted or downvoted a post
-#     upvote = 1
-#     downvote = 2
+class VoteEnum(enum.Enum):
+    # Used to show whether a user has upvoted or downvoted a post
+    upvote = 1
+    downvote = 2
 
 
-# class Vote(db.Model):
-#     # Table name
-#     __tablename__ = 'vote'
+class Vote(db.Model):
+    # Table name
+    __tablename__ = 'vote'
 
-#     # (primary keys are required by SQLAlchemy)
-#     id = db.Column(db.Integer, primary_key=True)
+    # (primary keys are required by SQLAlchemy)
+    id = db.Column(db.Integer, primary_key=True)
 
-#     # For creating the Post and votes one-to-many relationship
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    # For creating the Post and votes one-to-many relationship
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
-#     # Uses an enum to represent true or false
-#     upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
+    # Uses an enum to represent true or false
+    upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
 
 
-# class Follow(db.Model):
-#     # Table name
-#     __tablename__ = 'following'
+class Follow(db.Model):
+    # Table name
+    __tablename__ = 'following'
 
-#     # (primary keys are required by SQLAlchemy)
-#     id = db.Column(db.Integer, primary_key=True)
+    # (primary keys are required by SQLAlchemy)
+    id = db.Column(db.Integer, primary_key=True)
 
-#     # For creating the User and follows one-to-many relationship
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # For creating the User and follows one-to-many relationship
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
