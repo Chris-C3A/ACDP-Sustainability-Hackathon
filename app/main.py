@@ -5,7 +5,7 @@ from app import db
 
 from app import db
 from app.models import User, Post, Follow
-from app.src.utils import get_coordinates_of_posts
+from app.src.utils import get_coordinates_of_posts, list_to_json
 
 main = Blueprint('main', __name__)
 
@@ -25,11 +25,14 @@ def feed():
     page = render_template('postGen.html', posts=posts)
     return page
 
+
 @main.route('/explore')
 def exploreFeed():
-    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
+    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",
+                                                                                                                 '/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
     page = render_template('postGen.html', posts=posts)
     return page
+
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -76,13 +79,14 @@ def follow():
 @main.route('/map/get_locations', methods=['GET', 'POST'])
 def get_locations():
     if request.method == 'GET':
-        # return render_template('/map/map.html')
-        return render_template('map/maptest.html')
+        return render_template('/map/map.html')
+        # return render_template('map/maptest.html')
     elif request.method == 'POST':
         # query only post whose users are public
         posts = Post.query.all()
 
         # return in json format
-        coordinates = get_coordinates_of_posts(posts)
+        # coordinates = get_coordinates_of_posts(posts)
 
-        return jsonify(coordinates)
+        # return jsonify(coordinates)
+        return jsonify(list_to_json(posts))

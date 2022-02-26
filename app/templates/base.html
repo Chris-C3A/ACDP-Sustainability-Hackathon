@@ -16,10 +16,19 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="/static/main.css" />
     <link rel="stylesheet" href="/static/navbar.css" />
     {% block head %} {% endblock %}
@@ -27,25 +36,24 @@
 
   <body>
     <section class="hero is-fullheight">
-      <body>
-        <input type="checkbox" id="overlay-input" />
-        <label for="overlay-input" id="overlay-button"><span></span></label>
-        <div id="overlay">
-          <ul>
-            <li><a href="/">Home</a></li>
-            {% if current_user.is_authenticated %}
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/feed">Feed</a></li>
-            <li><a href="/explore">Explore</a></li>
-            {% else %}
-            <!-- <li><a href="#">About</a></li>
+      <input type="checkbox" id="overlay-input" />
+      <label for="overlay-input" id="overlay-button"><span></span></label>
+      <div id="overlay">
+        <ul>
+          <li><a href="/">Home</a></li>
+          {% if current_user.is_authenticated %}
+          <li><a href="/map/get_locations">Social Map</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/feed">Feed</a></li>
+          <li><a href="/explore">Explore</a></li>
+          {% else %}
+          <!-- <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li> -->
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-            {% endif %}
-          </ul>
-        </div>
-      </body>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
       <div class="hero-body">
         <div class="container has-text-centered">
           {% with messages = get_flashed_messages(with_categories=true) %} {% if
@@ -64,15 +72,13 @@
           var elementTop = reveals[i].getBoundingClientRect().top;
           var elementBottom = reveals[i].getBoundingClientRect().bottom;
           var elementVisible = 150;
-          if (elementTop < windowHeight - elementVisible && elementBottom > 0){
+          if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
             reveals[i].classList.add("active");
             reveals[i].classList.remove("past");
-          }
-          else if (elementBottom < 0){
+          } else if (elementBottom < 0) {
             reveals[i].classList.remove("active");
             reveals[i].classList.add("past");
-          }
-           else {
+          } else {
             reveals[i].classList.remove("active");
             reveals[i].classList.remove("past");
           }
@@ -81,6 +87,6 @@
       window.addEventListener("scroll", reveal);
 
       reveal();
-</script>
+    </script>
   </body>
 </html>

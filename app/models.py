@@ -7,10 +7,12 @@ from app.src.constants import *
 from datetime import datetime
 import enum
 
+
 class PrivacyEnum(enum.Enum):
     # Used to show whether a user profile is public or private
-    public = True;
-    private = False;
+    public = True
+    private = False
+
 
 class User(UserMixin, db.Model):
     # Table name
@@ -50,6 +52,16 @@ class Post(db.Model):
     @staticmethod
     def get_location():
         pass
+
+    def toJSON(self):
+        return {
+            "id": self.id,
+            "caption": self.caption,
+            "image_file": self.image_file,
+            "created_at": self.created_at,  # get how many hours/days ago it was created
+            "coordinates": [self.latitude, self.longitude],
+            "author": self.author.username
+        }
 
 
 class VoteEnum(enum.Enum):

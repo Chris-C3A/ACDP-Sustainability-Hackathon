@@ -36,3 +36,12 @@ def get_coordinates_of_posts(posts):
         coordinates.append(coord)
     
     return coordinates
+
+def list_to_json(lst, *args):
+    '''
+    serializer for list of models
+    '''
+    if args:
+        return [obj.toJSON(*args) for obj in lst]
+    else:
+        return [obj.toJSON() for obj in lst]

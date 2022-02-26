@@ -1,4 +1,8 @@
 {% extends "base.html" %} {% block head %}
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -13,29 +17,120 @@
   crossorigin=""
 ></script>
 
-{% endblock %}
 <style>
   #map {
-    height: 180px;
+    height: 600px;
   }
 </style>
-{% block content %}
-<div id="map"></div>
+
+{% endblock %} {% block content %}
+
+<h1>Waste Watchers Social Map</h1>
+
+<div class="mt-4" id="map"></div>
+
+<p class="mt-4" style="font-size: 30px; color: white">Submit waste collected</p>
+
+<button
+  class="button is-large is-fullwidth is-success mt-2"
+  style="font-size: 40px"
+  onclick="location.href='/post/new'"
+>
+  +
+</button>
+
 <script>
-  console.log("test");
-  let map = L.map("map").setView([51.505, -0.09], 13);
-  console.log(map);
-  //   L.tileLayer(
-  //     "https://api.mapbox.com/styles/v1/c3achris/tiles/1/1/1?access_token=pk.eyJ1IjoiYzNhY2hyaXMiLCJhIjoiY2wwNDRyamxiMDhtNTNlbnc5NHEzOHg2MyJ9.ZDRYxzgE8gmVogIiIuZIdg",
-  //     {
-  //       attribution:
-  //         'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-  //       maxZoom: 18,
-  //       id: "mapbox/streets-v11",
-  //       tileSize: 512,
-  //       zoomOffset: -1,
-  //       accessToken: "your.mapbox.access.token",
-  //     }
-  //   ).addTo(map);
+  function getCreatedTimePassed(created_at) {
+    let dateNow = new Date();
+    let dateCreated = new Date(created_at);
+
+    let delta = Math.abs(dateNow - dateCreated) / 1000;
+
+    let days = Math.floor(delta / 86400);
+
+    if (days > 0) {
+      return `${days} days ago`;
+    }
+
+    delta -= days * 86400;
+    let hours = Math.floor(delta / 3600) % 24;
+
+    if (hours > 0) {
+      return `${hours} hours ago`;
+    }
+
+    delta -= hours * 3600;
+    let minutes = Math.floor(delta / 60) % 60;
+
+    if (minutes > 0) {
+      return `${minutes} minutes ago`;
+    }
+
+    delta -= minutes * 60;
+    let seconds = delta % 60;
+
+    return `${seconds} seconds ago`;
+  }
+  async function getPostCoordinates() {
+    const response = await fetch("/map/get_locations", {
+      method: "POST",
+    });
+    return response.json();
+  }
+
+  function onLocationFound() {
+    var radius = e.accuracy;
+
+    L.marker(e.latlng)
+      .addTo(map)
+      .bindPopup("You are within " + radius + " meters from this point")
+      .openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+  }
+
+  getPostCoordinates().then((posts) => {
+    console.log(posts);
+    let map = L.map("map").setView([51.452399, -2.59834], 14);
+    L.tileLayer(
+      "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=LLiVrvxbSiHtGUFO8W2U",
+      {
+        attribution:
+          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      }
+    ).addTo(map);
+
+    for (const post of posts) {
+      // let marker = L.marker([51.452827, -2.607102]).addTo(map);
+      let trashIcon = L.icon({
+        iconUrl: "/static/icons/icons8-trash-40.png",
+        iconSize: [40, 40],
+      });
+      let marker = L.marker(post.coordinates, { icon: trashIcon }).addTo(map);
+      marker.bindPopup(
+        `<span style='font-weight: bold;'>@${post.author}:</span><p>${
+          post.caption
+        }</p><img src='/static/post_pics/${
+          post.image_file
+        }'> <p>${getCreatedTimePassed(post.created_at)}</p>`,
+        {
+          minWidth: 75,
+        }
+      );
+    }
+    function onLocationFound(e) {
+      var radius = e.accuracy;
+
+      L.marker(e.latlng)
+        .addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point")
+        .openPopup();
+
+      L.circle(e.latlng, radius).addTo(map);
+    }
+
+    map.on("locationfound", onLocationFound);
+    map.locate({ setView: true, maxZoom: 16 });
+  });
 </script>
 {% endblock %}
