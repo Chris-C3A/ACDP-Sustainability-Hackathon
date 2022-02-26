@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, flash, Flask, render_template
 from flask_login import login_required, current_user
+from .models import *
+from app import db
 
 main = Blueprint('main', __name__)
 mapViewer = Flask(__name__)
@@ -13,9 +15,13 @@ def index():
 
 @main.route('/feed')  # display posts
 def feed():
-    posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
+    posts = []
+    for record in Follow.query.filter_by(user_id=current_user.get_id()):
+        for post in (Post.query.filter_by(user_id=record.following_id).order_by(Post.created_at).all()):
+            posts.append(post)
     page = render_template('postGen.html', posts=posts)
     return page
+
 @main.route('/explore')
 def exploreFeed():
     posts = [(1, "User1", '/static/stock1.jpg', 'LOL xD'), (2, "User2", '/static/stock2.jpg', 'Funny Caption'), (3, "User3",'/static/stock3.jpg', 'haha'), (4, "User1", '/static/stock4.jpg', 'WasteWatchers Unite!')]  # map(tuple,fetchall(QUERY))
