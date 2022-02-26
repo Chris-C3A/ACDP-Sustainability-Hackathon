@@ -303,3 +303,16 @@ h1 {
   margin-left: 32vw;
   margin-top: 5vh;
 }
+.voting h5,button {
+  display: inline-block;
+  margin: 1vw;
+  background: transparent;
+  border: none !important;
+}
+.voting #voteImg {
+  width: 6vw;
+  height: auto;
+}
+.voting #caption {
+  margin-left: 10vw;
+}

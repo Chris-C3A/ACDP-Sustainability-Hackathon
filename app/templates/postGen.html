@@ -5,10 +5,13 @@
   <p style="text-align:center;">No posts to show :(</p>
 {% endif %}
 {% for item in posts %}
+
 <article id="{{ item.id }}" class="post">
     <h2> {{ item.author.username }} </h2>
     <img src="static/post_pics/{{ item.image_file }}">
-    <h5>{{ item.caption }}</h5>
+    <div class="voting">
+        <form action="" method="POST"><button value="{{item.id}}" type="submit" name="Up"><img src="static/upvote.png" id="voteImg"></button><h5>{{ votes[loop.index0] }}</h5><button value="{{item.id}}" type="submit" name="Down"><img src="static/downvote.png" id="voteImg"></button><h5 id="caption">{{ item.caption }}</h5></form>
+    </div>
 </article>
 {% endfor %}
 </div id="posts">
