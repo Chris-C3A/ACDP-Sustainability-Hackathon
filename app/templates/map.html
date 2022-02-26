@@ -21,13 +21,13 @@
         const coords = [[0.5,0.5], [100.5,100.5]];
         const features = [];
         for (i = 0; i < coords.length; i++) {
-            console.log(coords[i][0], coords[i][1])
             features.push(new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.fromLonLat([
                     coords[i][0], coords[i][1]
                 ]))
             }));
         }
+        console.log(features)
         // create the source and layer for random features
         const vectorSource = new ol.source.Vector({
             features
