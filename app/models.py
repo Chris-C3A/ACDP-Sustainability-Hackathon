@@ -1,10 +1,11 @@
-from turtle import title
+# from turtle import title
 from app import db
 from flask import current_app
 from flask_login import UserMixin
-from constants import *
+from app.constants import *
 from datetime import datetime
 import enum
+
 
 class User(UserMixin, db.Model):
     # Table name
@@ -20,50 +21,52 @@ class User(UserMixin, db.Model):
     # For creating the User and Post one-to-many relationship
     posts = db.relationship("Post", back_populates="author")
 
+
 class Post(db.Model):
     # Table name
     __tablename__ = 'post'
 
     # Post info
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(TITLE_CHAR_LIMIT))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
     caption = db.Column(db.String(CAPTION_CHAR_LIMIT))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-     # For creating the User and Post one-to-many relationship
+    # For creating the User and Post one-to-many relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
-    user = db.relationship("User", back_populates="posts")
+    author = db.relationship("User", back_populates="posts")
 
     # For creating the Post and votes one-to-many relationship
-    votes = db.relationship("vote")
+    # votes = db.relationship("vote")
 
-class VoteEnum(enum.Enum):
-    # Used to show whether a user has upvoted or downvoted a post    
-    upvote = 1
-    downvote = 2
 
-class Vote(db.Model):
-    # Table name
-    __tablename__ = 'vote'
+# class VoteEnum(enum.Enum):
+#     # Used to show whether a user has upvoted or downvoted a post
+#     upvote = 1
+#     downvote = 2
 
-    # (primary keys are required by SQLAlchemy)
-    id = db.Column(db.Integer, primary_key=True)
 
-    # For creating the Post and votes one-to-many relationship
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+# class Vote(db.Model):
+#     # Table name
+#     __tablename__ = 'vote'
 
-    # Uses an enum to represent true or false
-    upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
+#     # (primary keys are required by SQLAlchemy)
+#     id = db.Column(db.Integer, primary_key=True)
 
-class Follow(db.Model):
-    # Table name
-    __tablename__ = 'following'
+#     # For creating the Post and votes one-to-many relationship
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
-    # (primary keys are required by SQLAlchemy)
-    id = db.Column(db.Integer, primary_key=True)
+#     # Uses an enum to represent true or false
+#     upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
 
-    # For creating the User and follows one-to-many relationship
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    
+
+# class Follow(db.Model):
+#     # Table name
+#     __tablename__ = 'following'
+
+#     # (primary keys are required by SQLAlchemy)
+#     id = db.Column(db.Integer, primary_key=True)
+
+#     # For creating the User and follows one-to-many relationship
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
