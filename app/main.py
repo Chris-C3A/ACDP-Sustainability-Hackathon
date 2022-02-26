@@ -6,7 +6,9 @@ main = Blueprint('main', __name__)
 
 @main.route('/')  # home page that return 'index'
 def index():
-    return render_template('index.html')
+    posts=[(1,"Title1",'/static/avacad.jpg','LOL xD'),(2,"Title2",'/static/avacad.jpg', 'Funny Caption'),(3,"Title3",'/static/avacad.jpg', 'haha'),(4,"Title4",'/static/avacad.jpg','WasteWatchers Unite!')] #map(tuple,fetchall(QUERY))
+    page = render_template('postGen.html',posts=posts)
+    return page
 
 
 @main.route('/profile')
