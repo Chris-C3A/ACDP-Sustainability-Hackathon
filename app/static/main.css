@@ -91,6 +91,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  max-width: 100vw;
 }
 
 article,
@@ -227,18 +228,27 @@ h1 {
     text-align: left;
 }
 .posts h2 {
-    font-size: 30px;
-    margin-left: 10px;
-    padding-top:5px;
-    margin-bottom: 5px;
+    font-size: 3vw;
+    padding-top:1vw;
+    margin-bottom: 1vw;
+    position: absolute;
+    top: 0;
+    background: rgba(32, 188, 86, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    font-size: 2vw;
+    padding: 2vw;
+    text-align: center;
+    border-top-left-radius: 2vw;
+    border-top-right-radius: 2vw;
 }
 .posts img {
     max-width: 100%;
     height: auto;
     scale: d;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 2vw;
 }
 .posts h5 {
     text-align: center;
@@ -248,5 +258,6 @@ h1 {
 .posts article {
     margin-bottom: 25px;
     background-color: #20bc56; /*Placeholder colour*/
-    border-radius: 5px;
+    border-radius: 2vw;
+    position: relative;
 }
