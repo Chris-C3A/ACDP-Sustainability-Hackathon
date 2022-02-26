@@ -32,7 +32,7 @@ class Post(db.Model):
 
      # For creating the User and Post one-to-many relationship
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
-    user = db.relationship("Author", back_populates="posts")
+    user = db.relationship("User", back_populates="posts")
 
     # For creating the Post and votes one-to-many relationship
     votes = db.relationship("vote")
@@ -56,5 +56,14 @@ class Vote(db.Model):
     # Uses an enum to represent true or false
     upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
 
+class Follow(db.Model):
+    # Table name
+    __tablename__ = 'following'
 
+    # (primary keys are required by SQLAlchemy)
+    id = db.Column(db.Integer, primary_key=True)
 
+    # For creating the User and follows one-to-many relationship
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    following_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
