@@ -244,8 +244,10 @@ h1 {
     font-family: 'Montserrat', sans-serif;
 }
 .posts img {
-  max-width: 100%;
-  height: auto;
+  max-height: 100%;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
   scale: d;
   display: block;
   border-radius: 2vw;
@@ -257,7 +259,7 @@ h1 {
 }
 .posts article {
   margin-bottom: 25px;
-  background-color: #20bc56; /*Placeholder colour*/
+  background-color: #ffffff; /*Placeholder colour*/
   border-radius: 2vw;
   position: relative;
 }
