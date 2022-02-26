@@ -41,8 +41,6 @@ def signup():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        # user = User.query.filter_by(email=email).first()
-
         # if this returns a user, then the email already exists in database
         user = User.query.filter_by(email=email).first()
         if user:
