@@ -53,7 +53,7 @@ class Vote(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
-    # True for upvoted, false for downvoted
+    # Uses an enum to represent true or false
     upvoted = db.Column(db.Enum(VoteEnum), nullable=False)
 
 
