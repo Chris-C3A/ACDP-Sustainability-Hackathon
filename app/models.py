@@ -2,7 +2,7 @@
 from app import db
 from flask import current_app
 from flask_login import UserMixin
-from app.constants import *
+from app.src.constants import *
 from datetime import datetime
 import enum
 
