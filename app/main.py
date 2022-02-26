@@ -38,17 +38,16 @@ def exploreFeed():
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
-    if request.method == 'GET':
-        return render_template('profile.html')
-    # else:
-    #     username
-    #     email
-    #     public
-
-    #     current_user.username = username
-    #     u
-
-    #     db.session.commit()
+    posts = []
+    for post in (Post.query.filter_by(user_id=current_user.id).order_by(Post.created_at).all()):
+        posts.append(post)
+    posts.sort(key=lambda l:l.created_at, reverse=True)
+    followers = len(Follow.query.filter_by(following_id=current_user.get_id()).all())
+    following = len(Follow.query.filter_by(user_id=current_user.get_id()).all())
+    page = render_template('profile.html', posts=posts, followers=followers, following=following,
+                            numberOfPosts=len(posts))
+    return page
+        
 
 # api request
 
