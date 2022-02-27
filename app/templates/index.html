@@ -1,4 +1,55 @@
-{% extends "base.html" %} {% block content %}
-<h1 class="title">Waste Watchers</h1>
-<h2 class="subtitle">Use the Navigation Menu To Login</h2>
+{% extends "base.html" %} {% block head %}
+<style>
+  body {
+    /* background-image: url("/static/background/istockphoto-1317998127-170667a.jpg"); */
+    background-image: url("/static/background/background11.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    /* background-size: 400px 400px; */
+  }
+</style>
+{% endblock %} {% block content %}
+<p class="title" style="color: #36582f; font-weight: bolder; font-size: 40px">
+  Waste Watchers
+</p>
+<div class="buttons" style="margin: auto; width: 50%">
+  {% if current_user.is_authenticated %}
+  <button
+    class="button is-primary is-light is-medium"
+    onclick="location.href='/feed'"
+  >
+    Feed
+  </button>
+  <button
+    class="button is-link is-light is-medium"
+    onclick="location.href='/explore'"
+  >
+    Explore
+  </button>
+  {% else %}
+  <button
+    class="button is-primary is-light is-medium"
+    onclick="location.href='/signup'"
+  >
+    Signup
+  </button>
+  <button
+    class="button is-link is-light is-medium"
+    onclick="location.href='/login'"
+  >
+    Login
+  </button>
+  {% endif %}
+</div>
+<div class="" style="margin: 0 auto; width: 50%">
+  <button
+    class="button is-info is-light is-medium"
+    onclick="location.href='/map/get_locations'"
+  >
+    Social Map
+  </button>
+</div>
+
+<!-- <h2 class="subtitle">Use the Navigation Menu To Login</h2> -->
 {% endblock %}

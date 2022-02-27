@@ -39,7 +39,7 @@ def new_post():
             db.session.commit()
 
             flash('Post successfully created', 'success')
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.get_locations'))
         else:
             flash('Please select an image', 'danger')
             return redirect(url_for('post.new_post'))

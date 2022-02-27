@@ -70,8 +70,10 @@ body {
   line-height: 1.5;
   margin: 0;
   text-align: left;
-  color: #525f7f;
-  background-color: #f8f9fe;
+  /* color: #525f7f; */
+  color: white;
+  /* background-color: #f8f9fe; */
+  /* background: #5cb25d; */
 }
 
 [tabindex='-1']:focus {

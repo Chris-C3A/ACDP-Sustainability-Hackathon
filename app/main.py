@@ -106,6 +106,35 @@ def exploreFeed():
         return redirect('/explore')
 
 
+#! have voting as separate route?
+# @main.route('/vote/<int: post_id>', methods=['POST'])
+# @login_required
+# def vote(post_id):
+
+    # vote1 = request.form.get('Up')
+    # vote2 = request.form.get('Down')
+    # new_vote = None
+    # if (vote1 is not None):
+    #     record = Vote.query.filter_by(post_id=vote1).filter_by(
+    #         user_id=current_user.get_id()).first()
+    #     if (record is not None):
+    #         record.upvoted = VoteEnum.upvote
+    #     else:
+    #         new_vote = Vote(user_id=current_user.get_id(),
+    #                         post_id=vote1, upvoted=VoteEnum.upvote)
+    # elif (vote2 is not None):
+    #     record = Vote.query.filter_by(post_id=vote2).filter_by(
+    #         user_id=current_user.get_id()).first()
+    #     if (record is not None):
+    #         record.upvoted = VoteEnum.downvote
+    #     else:
+    #         new_vote = Vote(user_id=current_user.get_id(),
+    #                         post_id=vote2, upvoted=VoteEnum.downvote)
+    # if (new_vote is not None):
+    #     db.session.add(new_vote)
+    # db.session.commit()
+
+
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
     posts = []
@@ -163,6 +192,8 @@ def get_locations():
 
         # return jsonify(coordinates)
         return jsonify(list_to_json(posts))
+
+
 @main.app_errorhandler(404)
 def resource_not_found(e):
     return '<html><head><title> Error 404 </title><link href="static/main.css", rel="stylesheet"><style>h1 {top: 50%; transform: translateY(50px);}</style></head><body><center><h1>Error 404: Page Not Found</h1></center></body></html>', 404
