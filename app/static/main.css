@@ -316,3 +316,9 @@ h1 {
 .voting #caption {
   margin-left: 10vw;
 }
+
+#time_created {
+  float: right;
+  margin-top: 10px;
+  margin-right: 5px;
+}
