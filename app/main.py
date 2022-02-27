@@ -140,14 +140,16 @@ def exploreFeed():
 def profile():
     posts = []
     votes = []
+    index = 0
     for post in (Post.query.filter_by(user_id=current_user.id).order_by(Post.created_at).all()):
         votes.append(0)
         for voteRecord in Vote.query.filter_by(post_id=post.id):
             if (voteRecord.upvoted == VoteEnum.upvote):
                 votes[index] += 1
             elif (voteRecord.upvoted == VoteEnum.downvote):
-                votes[index] -= 1
+                votes[index] -= 1               
         posts.append(post)
+        index += 1
     posts.sort(key=lambda l: l.created_at, reverse=True)
     followers = len(Follow.query.filter_by(
         following_id=current_user.get_id()).all())
