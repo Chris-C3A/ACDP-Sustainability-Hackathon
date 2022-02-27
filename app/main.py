@@ -136,9 +136,10 @@ def exploreFeed():
 
 
 @main.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     posts = []
-    votes=[]
+    votes = []
     for post in (Post.query.filter_by(user_id=current_user.id).order_by(Post.created_at).all()):
         votes.append(0)
         for voteRecord in Vote.query.filter_by(post_id=post.id):
