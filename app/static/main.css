@@ -323,3 +323,7 @@ button {
 .voting #caption {
   margin-left: 10vw;
 }
+.voting #cap {
+  left: 50%;
+  width: 100%;
+}
