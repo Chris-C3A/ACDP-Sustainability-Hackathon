@@ -16,25 +16,32 @@ def new_post():
     elif request.method == 'POST':
         # author = current_user
         caption = request.form.get('caption')
-        # longitude = request.form.get('longitude')
-        # latitude = request.form.get('latitude')
-        lat, lng = request.form.get('latlng').split(',')
 
+        if request.form.get('latlng'):
+            lat, lng = request.form.get('latlng').split(',')
+        else:
+            flash('Select a location on the map', 'danger')
+            return redirect(url_for('post.new_post'))
 
         uploaded_image = request.files['file']
-        post_image = savePostImage(uploaded_image)
 
-        if post_image:
+        if caption == "":
+            flash('Please enter a caption', 'danger')
+            return redirect(url_for('post.new_post'))
+
+        if uploaded_image:
             # creates new post
-            new_post = Post(caption=caption, longitude=lng, latitude=lat, image_file=post_image, author=current_user)
-            
+            post_image = savePostImage(uploaded_image)
+            new_post = Post(caption=caption, longitude=lng, latitude=lat,
+                            image_file=post_image, author=current_user)
+
             db.session.add(new_post)
             db.session.commit()
 
             flash('Post successfully created', 'success')
             return redirect(url_for('main.index'))
         else:
-            flash('Image size too large! Please use a different image', 'danger')
+            flash('Please select an image', 'danger')
             return redirect(url_for('post.new_post'))
 
 
