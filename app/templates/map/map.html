@@ -25,19 +25,9 @@
 
 {% endblock %} {% block content %}
 
-<h1>Social Map</h1>
+<h1 id="maptitle">Social Map</h1>
 
 <div class="mt-4" id="map"></div>
-
-<p class="mt-4" style="font-size: 30px; color: white">Submit waste collected</p>
-
-<button
-  class="button is-large is-fullwidth is-primary mt-2"
-  style="font-size: 30px"
-  onclick="location.href='/post/new'"
->
-  +
-</button>
 
 <script>
   function getCreatedTimePassed(created_at) {
