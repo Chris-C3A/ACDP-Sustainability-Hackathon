@@ -31,7 +31,7 @@
             id="voteImg"></button>
         <h5>{{ votes[loop.index0] }}</h5><button value="{{item.id}}" type="submit" disabled=True name="Down"><img
             src="static/downvote.png" id="voteImg"></button>
-        <h5 id="time_created""></h5>
+        <h5 id="{{item.id}}-time"></h5>
           <h5>@{{item.author.username}}: {{ item.caption }}</h5></form>
       </div>
   </article>
@@ -69,7 +69,7 @@
 
       return `${seconds} seconds ago`;
     }
-    document.getElementById('time_created').innerText = getCreatedTimePassed(" {{ item.created_at }}") </script>
+    document.getElementById('{{ item.id }}-time').innerText = getCreatedTimePassed(" {{ item.created_at }}") </script>
   {% endfor %}
 </div id="posts">
 {% else %}
