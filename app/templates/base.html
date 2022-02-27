@@ -36,7 +36,6 @@
 
   <body>
     <section class="hero is-fullheight">
-      {% block feedbar %} {% endblock %}
       <input type="checkbox" id="overlay-input" />
       <label for="overlay-input" id="overlay-button" onclick="toggleMap()"
         ><span></span
@@ -47,6 +46,7 @@
           {% if current_user.is_authenticated %}
           <li><a href="/post/new">New Post</a></li>
           <li><a href="/feed">Feed</a></li>
+          <li><a href="/explore">Explore</a></li>
           <li><a href="/map/get_locations">Social Map</a></li>
           <li><a href="/profile">Profile</a></li>
           <li><a href="/findFriends">Add Friends</a></li>
