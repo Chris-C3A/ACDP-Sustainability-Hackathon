@@ -163,3 +163,6 @@ def get_locations():
 
         # return jsonify(coordinates)
         return jsonify(list_to_json(posts))
+@main.app_errorhandler(404)
+def resource_not_found(e):
+    return '<html><head><title> Error 404 </title><link href="static/main.css", rel="stylesheet"><style>h1 {top: 50%; transform: translateY(50px);}</style></head><body><center><h1>Error 404: Page Not Found</h1></center></body></html>', 404
