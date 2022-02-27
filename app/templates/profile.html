@@ -1,14 +1,29 @@
-{% extends "base.html" %}
-{% block head %}
+{% extends "base.html" %} {% block head %}
 <link href="/static/profile.css" rel="stylesheet" type="text/css" media="all" />
-{% endblock %}
-{% block content %}
-{% if current_user.is_authenticated %}
+<style>
+  /* .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+} */
+
+  .mid-nav {
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+    height: 100px;
+    vertical-align: middle;
+    background-color: #7bad60;
+  }
+</style>
+{% endblock %} {% block content %} {% if current_user.is_authenticated %}
 <h1 class="Username">@{{ current_user.username }}</h1>
 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
   <div>
-    <h2
- class="Heading">{{ numberOfPosts }}</h2>
+    <h2 class="Heading">{{ numberOfPosts }}</h2>
     <h2 class="Description">Posts</h2>
   </div>
   <div>
@@ -20,23 +35,54 @@
     <h2 class="Description">Following</h2>
   </div>
 </div>
-<h2 class="Yourposts">Your posts:</h3>
-<div class="posts">
+<h1 class="" style="text-align: center">Your Posts:</h1>
+{% for item in posts %}
+<div class="card mt-4" style="outline-color: gray; outline-width: 5px">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img
+        src="/static/post_pics/{{ item.image_file }}"
+        alt="Placeholder image"
+      />
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <!-- <p class="title is-4">John Smith</p> -->
+        <p class="subtitle is-6">@{{ item.author.username }}</p>
+      </div>
+    </div>
+
+    <div class="content">
+      {{ item.caption }}
+      <a href="#">#css</a> <a href="#">#responsive</a>
+      <br />
+      <!-- put datetime -->
+      <time datetime="2016-1-1">{{ item.created_at }}</time>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- <div class="posts">
   {% for item in posts %}
   <article id="{{ item.id }}" class="post">
-    <h2> {{ item.author.username }} </h2>
+    <h2> @{{ item.author.username }} </h2>
     <img src="static/post_pics/{{ item.image_file }}">
     <h5>{{ item.caption }}</h5>
   </article>
   {% endfor %}
-</div id="posts">
+</div id="posts"> -->
 {% else %}
 <h1>Please Login to See Posts</h1>
-{% endif %}
-{% endblock %}
-{% block feedbar %}
-<div class="side-buttons">
+{% endif %} {% endblock %} {% block feedbar %}
+<div class="mid-nav">
   <a href="/feed"><button id="left">Feed</button></a>
   <a href="/explore"><button id="right">Explore</button></a>
 </div>
+<!-- <div class="side-buttons">
+  <a href="/feed"><button id="left">Feed</button></a>
+  <a href="/explore"><button id="right">Explore</button></a>
+</div> -->
 {% endblock %}

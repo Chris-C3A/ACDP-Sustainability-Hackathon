@@ -212,7 +212,7 @@ body {
   background: linear-gradient(to top, #76b852, #8dc26f);
   background-size: cover;
   background-attachment: fixed;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
@@ -222,26 +222,26 @@ h1 {
   font-weight: 100;
   text-transform: capitalize;
   letter-spacing: 4px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 .posts {
   text-align: left;
 }
 .posts h2 {
-    padding-top:1vw;
-    margin-bottom: 1vw;
-    position: absolute;
-    top: 0;
-    background: rgba(32, 188, 86, 0.5); /* Black see-through */
-    color: #f1f1f1;
-    width: 100%;
-    transition: 0.5s ease;
-    font-size: 4vw;
-    padding: 2vw;
-    text-align: center;
-    border-top-left-radius: 2vw;
-    border-top-right-radius: 2vw;
-    font-family: 'Montserrat', sans-serif;
+  padding-top: 1vw;
+  margin-bottom: 1vw;
+  position: absolute;
+  top: 0;
+  background: rgba(32, 188, 86, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  font-size: 4vw;
+  padding: 2vw;
+  text-align: center;
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
+  font-family: "Montserrat", sans-serif;
 }
 .posts img {
   max-height: 100%;
@@ -278,32 +278,35 @@ h1 {
   opacity: 0;
 }
 #left {
-	border-bottom-left-radius: 10px;
-	border-top-left-radius: 10px;
-	margin-right: 0px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-right: 0px;
 }
 #right {
-	border-bottom-right-radius: 10px;
-	border-top-right-radius: 10px;
-	margin-left: 0px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-left: 0px;
 }
 .side-buttons button {
-	float: left;
-  background-color: #4dc451;
+  /* float: left; */
+  /* background-color: #4dc451; */
 }
 .side-buttons:after {
   content: "";
   clear: both;
   display: table;
 }
-.side-buttons button::focus{
+.side-buttons button::focus {
   background-color: #209424;
 }
 .side-buttons {
-  margin-left: 32vw;
+  margin: auto;
+  width: 50%;
+  /* margin-left: 32vw; */
   margin-top: 5vh;
 }
-.voting h5,button {
+.voting h5,
+button {
   display: inline-block;
   margin: 1vw;
   background: transparent;
