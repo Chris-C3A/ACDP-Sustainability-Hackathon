@@ -7,7 +7,7 @@
 {% for item in posts %}
 
 <article id="{{ item.id }}" class="post">
-    <img src="static/post_pics/{{ item.image_file }}">
+    <img src="static/post_pics/{{ item.image_file }}" style="width: 100%;">
     <div class="voting">
         <form action="" method="POST">
           <button value="{{item.id}}" type="submit" name="Up">
