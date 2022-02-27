@@ -13,7 +13,7 @@
 <p class="title" style="color: #36582f; font-weight: bolder; font-size: 40px">
   Waste Watchers
 </p>
-<div class="buttons" style="margin: auto; width: 50%">
+<div class="buttons" style="margin: auto; width: 50%; display: inline-block;">
   {% if current_user.is_authenticated %}
   <button
     class="button is-primary is-light is-medium"
@@ -42,7 +42,7 @@
   </button>
   {% endif %}
 </div>
-<div class="" style="margin: 0 auto; width: 50%">
+<div class="" style="margin: 0 auto; width: 50%; display: inline-block;">
   <button
     class="button is-info is-light is-medium"
     onclick="location.href='/map/get_locations'"
