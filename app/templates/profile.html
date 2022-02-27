@@ -23,11 +23,53 @@
 <h2 class="Yourposts">Your posts:</h3>
 <div class="posts">
   {% for item in posts %}
+
   <article id="{{ item.id }}" class="post">
-    <h2> {{ item.author.username }} </h2>
     <img src="static/post_pics/{{ item.image_file }}">
-    <h5>{{ item.caption }}</h5>
+    <div class="voting">
+      <form action="" method="POST"><button value="{{item.id}}" type="submit" name="Up" disabled=True><img src="static/upvote.png"
+            id="voteImg"></button>
+        <h5>{{ votes[loop.index0] }}</h5><button value="{{item.id}}" type="submit" disabled=True name="Down"><img
+            src="static/downvote.png" id="voteImg"></button>
+        <h5 id="time_created""></h5>
+          <h5>@{{item.author.username}}: {{ item.caption }}</h5></form>
+      </div>
   </article>
+  
+  <script>
+
+    function getCreatedTimePassed(created_at) {
+      let dateNow = new Date();
+      let dateCreated = new Date(created_at);
+
+      let delta = Math.abs(dateNow - dateCreated) / 1000;
+
+      let days = Math.floor(delta / 86400);
+
+      if (days > 0) {
+        return `${days} days ago`;
+      }
+
+      delta -= days * 86400;
+      let hours = Math.floor(delta / 3600) % 24;
+
+      if (hours > 0) {
+        return `${hours} hours ago`;
+      }
+
+      delta -= hours * 3600;
+      let minutes = Math.floor(delta / 60) % 60;
+
+      if (minutes > 0) {
+        return `${minutes} minutes ago`;
+      }
+
+      delta -= minutes * 60;
+      let seconds = delta % 60;
+
+      return `${seconds} seconds ago`;
+    }
+    document.getElementById('time_created').innerText = getCreatedTimePassed(" {{ item.created_at }}") </script>
   {% endfor %}
 </div id="posts">
 {% else %}

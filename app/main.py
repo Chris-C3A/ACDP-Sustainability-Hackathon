@@ -138,14 +138,21 @@ def exploreFeed():
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
     posts = []
+    votes=[]
     for post in (Post.query.filter_by(user_id=current_user.id).order_by(Post.created_at).all()):
+        votes.append(0)
+        for voteRecord in Vote.query.filter_by(post_id=post.id):
+            if (voteRecord.upvoted == VoteEnum.upvote):
+                votes[index] += 1
+            elif (voteRecord.upvoted == VoteEnum.downvote):
+                votes[index] -= 1
         posts.append(post)
     posts.sort(key=lambda l: l.created_at, reverse=True)
     followers = len(Follow.query.filter_by(
         following_id=current_user.get_id()).all())
     following = len(Follow.query.filter_by(
         user_id=current_user.get_id()).all())
-    page = render_template('profile.html', posts=posts, followers=followers, following=following,
+    page = render_template('profile.html', votes=votes, posts=posts, followers=followers, following=following,
                            numberOfPosts=len(posts))
     return page
 
